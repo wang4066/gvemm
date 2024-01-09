@@ -2,3 +2,6 @@
 
 export(gvemm)
 export(iwgvemm)
+import(torch)
+importFrom(stats,dnorm)
+importFrom(stats,rnorm)

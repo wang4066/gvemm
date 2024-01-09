@@ -39,26 +39,42 @@ iwgvemm(
 \item{c}{Constant for computing GIC}
 }
 \value{
-A list whose length is equal to \code{Lambda0}
-\item{lambda0}{Corresponding element in \code{Lambda0}}
-\item{lambda}{\code{sqrt(N) * lambda0}}
-\item{SIGMA}{Person-level posterior covariance matrices}
-\item{MU}{Person-level posterior mean vectors}
-\item{Sigma}{Group-level posterior covariance matrices}
-\item{Mu}{Group-level posterior mean vectors}
-\item{a}{Slopes for group 1}
-\item{b}{Intercepts for group 1}
-\item{gamma}{DIF parameters for the slopes}
-\item{beta}{DIF parameters for the intercepts}
-\item{ll}{Log-likelihood}
-\item{l0}{Number of nonzero parameters in \code{gamma} and \code{beta}}
-\item{AIC}{Akaike Information Criterion}
-\item{BIC}{Bayesian Information Criterion}
-\item{GIC}{Generalized Information Criterion}
+A list whose length is equal to \code{Lambda0}:\tabular{ll}{
+\code{lambda0} \tab {Corresponding element in \code{Lambda0}} \cr
+\tab \cr
+\code{lambda} \tab {\code{sqrt(N) * lambda0}} \cr
+\tab \cr
+\code{SIGMA} \tab {Person-level posterior covariance matrices} \cr
+\tab \cr
+\code{MU} \tab {Person-level posterior mean vectors} \cr
+\tab \cr
+\code{Sigma} \tab {Group-level posterior covariance matrices} \cr
+\tab \cr
+\code{Mu} \tab {Group-level posterior mean vectors} \cr
+\tab \cr
+\code{a} \tab {Slopes for group 1} \cr
+\tab \cr
+\code{b} \tab {Intercepts for group 1} \cr
+\tab \cr
+\code{gamma} \tab {DIF parameters for the slopes} \cr
+\tab \cr
+\code{beta} \tab {DIF parameters for the intercepts} \cr
+\tab \cr
+\code{ll} \tab {Log-likelihood} \cr
+\tab \cr
+\code{l0} \tab {Number of nonzero parameters in \code{gamma} and \code{beta}} \cr
+\tab \cr
+\code{AIC} \tab {Akaike Information Criterion} \cr
+\tab \cr
+\code{BIC} \tab {Bayesian Information Criterion} \cr
+\tab \cr
+\code{GIC} \tab {Generalized Information Criterion} \cr
+}
 }
 \description{
 IW-GVEMM Algorithm for DIF Detection in 2PL Models
 }
 \examples{
-with(gvemm_simdata) iwgvemm(Y, D, X)
+\dontrun{
+result <- with(gvemm_simdata, iwgvemm(Y, D, X))}
 }

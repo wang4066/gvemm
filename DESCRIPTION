@@ -10,9 +10,8 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends: 
-    R (>= 2.10)
-LazyData: true
-Imports: 
+    R (>= 2.10),
     torch
+LazyData: true
 URL: https://github.com/weiconglyu/gvemm
 BugReports: https://github.com/weiconglyu/gvemm/issues

@@ -228,33 +228,51 @@ IC.iwgvemm <- function(Y, X, SIGMA, MU, Sigma.L, Mu, a, b, gamma, beta, c, z, th
 #' @param eps Termination criterion on numerical accuracy
 #' @param c Constant for computing GIC
 #'
-#' @return A list whose length is equal to `Lambda0`
-#' \item{lambda0}{Corresponding element in `Lambda0`}
-#' \item{lambda}{`sqrt(N) * lambda0`}
-#' \item{SIGMA}{Person-level posterior covariance matrices}
-#' \item{MU}{Person-level posterior mean vectors}
-#' \item{Sigma}{Group-level posterior covariance matrices}
-#' \item{Mu}{Group-level posterior mean vectors}
-#' \item{a}{Slopes for group 1}
-#' \item{b}{Intercepts for group 1}
-#' \item{gamma}{DIF parameters for the slopes}
-#' \item{beta}{DIF parameters for the intercepts}
-#' \item{ll}{Log-likelihood}
-#' \item{l0}{Number of nonzero parameters in `gamma` and `beta`}
-#' \item{AIC}{Akaike Information Criterion}
-#' \item{BIC}{Bayesian Information Criterion}
-#' \item{GIC}{Generalized Information Criterion}
+#' @return A list whose length is equal to `Lambda0`:\tabular{ll}{
+#' \code{lambda0} \tab {Corresponding element in \code{Lambda0}} \cr
+#' \tab \cr
+#' \code{lambda} \tab {\code{sqrt(N) * lambda0}} \cr
+#' \tab \cr
+#' \code{SIGMA} \tab {Person-level posterior covariance matrices} \cr
+#' \tab \cr
+#' \code{MU} \tab {Person-level posterior mean vectors} \cr
+#' \tab \cr
+#' \code{Sigma} \tab {Group-level posterior covariance matrices} \cr
+#' \tab \cr
+#' \code{Mu} \tab {Group-level posterior mean vectors} \cr
+#' \tab \cr
+#' \code{a} \tab {Slopes for group 1} \cr
+#' \tab \cr
+#' \code{b} \tab {Intercepts for group 1} \cr
+#' \tab \cr
+#' \code{gamma} \tab {DIF parameters for the slopes} \cr
+#' \tab \cr
+#' \code{beta} \tab {DIF parameters for the intercepts} \cr
+#' \tab \cr
+#' \code{ll} \tab {Log-likelihood} \cr
+#' \tab \cr
+#' \code{l0} \tab {Number of nonzero parameters in \code{gamma} and \code{beta}} \cr
+#' \tab \cr
+#' \code{AIC} \tab {Akaike Information Criterion} \cr
+#' \tab \cr
+#' \code{BIC} \tab {Bayesian Information Criterion} \cr
+#' \tab \cr
+#' \code{GIC} \tab {Generalized Information Criterion} \cr
+#' }
 #'
+#' @import torch
+#' @importFrom stats dnorm
+#' @importFrom stats rnorm
 #' @export
 #'
 #' @examples
-#' with(gvemm_simdata) iwgvemm(Y, D, X)
-
+#' \dontrun{
+#' result <- with(gvemm_simdata, iwgvemm(Y, D, X))}
 iwgvemm <- function(Y, D, X, Lambda0 = seq(0.2, 0.7, by = 0.1), S = 10, M = 10, lr = 0.1, iter = 1000, eps = 1e-3, c = 0.7) {
   N <- nrow(Y)
   K <- ncol(D)
   z <- array(rnorm(N * S * M * K), c(N, S * M, K))
-  theta.logd <- rowSums(dnorm(z, log = T), dim = 2)
+  theta.logd <- rowSums(dnorm(z, log = T), dims = 2)
 
   em <- EM.iwgvemm(Y, D, X, iter, eps)
   lapply(Lambda0, function(lambda0) {
