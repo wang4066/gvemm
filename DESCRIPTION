@@ -14,3 +14,5 @@ Depends:
 LazyData: true
 Imports: 
     torch
+URL: https://github.com/weiconglyu/gvemm
+BugReports: https://github.com/weiconglyu/gvemm/issues
