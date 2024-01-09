@@ -83,7 +83,6 @@ EM.iwgvemm <- function(Y, D, X, iter, eps) {
       break
     params.old <- params
   }
-  print(paste('EM:', i))
   params
 }
 
@@ -179,7 +178,6 @@ IW.iwgvemm <- function(Y, D, X, SIGMA, MU, Sigma, Mu, a, b, gamma, beta, lambda,
           break
         params.old <- params
       }
-      print(paste('IW:', i))
       params
     })
   }
@@ -277,7 +275,6 @@ iwgvemm <- function(Y, D, X, Lambda0 = seq(0.2, 0.7, by = 0.1), S = 10, M = 10, 
   em <- EM.iwgvemm(Y, D, X, iter, eps)
   lapply(Lambda0, function(lambda0) {
     lambda <- sqrt(N) * lambda0
-    print(c(lambda0, lambda))
     list2env(em, environment())
     iw <- IW.iwgvemm(Y, D, X, SIGMA, MU, Sigma, Mu, a, b, gamma, beta, lambda, z, theta.logd, S, M, iter, eps, lr)
     list2env(iw, environment())
