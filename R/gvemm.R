@@ -1,3 +1,25 @@
+`%*%.torch_tensor` <- function(e1, e2) {
+  torch_matmul(e1, e2)
+}
+
+t.torch_tensor <- function(e) {
+  torch_transpose(e, -1, -2)
+}
+
+diagonal <- function(e) {
+  torch_diagonal(e, dim1 = -1, dim2 = -2)
+}
+
+sym <- function(e) {
+  (e + t(e)) / 2
+}
+
+distance <- function(x, y) {
+  mapply(function(x, y) {
+    max(abs(x - y))
+  }, x, y)
+}
+
 EM.gvemm <- function(Y, D, X, lambda, iter, eps) {
   init <- function() {
     with(parent.frame(), {
